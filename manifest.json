@@ -1,0 +1,16 @@
+{
+
+  "manifest_version": 2,
+  "name": "translate menu",
+  "version": "1.0",
+ 
+  "description": "選択したテキストを英辞郎 on the WEB, Weblio辞書で検索します",
+
+  "background": {
+    "scripts": ["background-script.js"]
+  },
+
+  "permissions": [
+    "menus"
+  ]
+}
