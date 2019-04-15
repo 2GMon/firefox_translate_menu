@@ -15,12 +15,19 @@ browser.menus.onClicked.addListener(function(info, tab) {
         "https://translate.google.com/#view=home&op=translate&sl=en&tl=ja&text=__TEXT__",
       ];
 
-      dictionary.forEach(function (url) {
-        var creating = browser.tabs.create({
-          url: url.replace(/__TEXT__/, info.selectionText),
-          active: false
+      let activeTab = browser.tabs.query({
+        active: true,
+        currentWindow: true
+      });
+      activeTab.then(function (tab) {
+        dictionary.forEach(function (url) {
+          var creating = browser.tabs.create({
+            url: url.replace(/__TEXT__/, info.selectionText),
+            active: false,
+            openerTabId: tab[0].id
+          });
+          creating.then(onCreated, onError);
         });
-        creating.then(onCreated, onError);
       });
       break;
   }
@@ -32,4 +39,7 @@ function onCreated(tab) {
 
 function onError(error) {
   console.log(`Error: ${error}`);
+}
+
+function openTab(url) {
 }
